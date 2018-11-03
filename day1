@@ -1,0 +1,270 @@
+notice that the allocation of memory os very fast ,even if i call a 3000*3000random matrix
+covered whole chap2
+
+
+code:amatrixnd outputs
+>>> import tensorflow as tf
+>>> tf.InteractiveSession()
+<tensorflow.python.client.session.InteractiveSession object at 0x7f45b363ac90>
+>>> tf.zeros(2)
+<tf.Tensor 'zeros:0' shape=(2,) dtype=float32>
+>>> a=tf.zeros(2)
+>>> a.eval()
+array([ 0.,  0.], dtype=float32)
+>>> a=tf.zeros((2,3))
+>>> a.eval()
+array([[ 0.,  0.,  0.],
+       [ 0.,  0.,  0.]], dtype=float32)
+>>> b=tf.ones((2,3))
+>>> b.eval()
+array([[ 1.,  1.,  1.],
+       [ 1.,  1.,  1.]], dtype=float32)
+>>> b=tf.fill((2,2),value=5)
+>>> b.eval()
+array([[5, 5],
+       [5, 5]], dtype=int32)
+>>> b=tf.fill((2,2),value=5.)
+>>> b.eval()
+array([[ 5.,  5.],
+       [ 5.,  5.]], dtype=float32)
+>>> a=tf.constant(3)
+>>> a.eval()
+3
+>>> a=tf.random_normal((3,3),mean=0,stddev=1)
+>>> a.eval()
+array([[-0.44282451,  1.54706788, -0.64837587],
+       [-0.85019922, -0.66593391,  0.51606756],
+       [ 2.24529076, -0.39937097,  0.84990185]], dtype=float32)
+>>> a=tf.random_normal((3000,3000),mean=0,stddev=1)
+>>> a.eval()
+2018-11-03 07:21:15.050801: W tensorflow/core/framework/allocator.cc:113] Allocation of 36000000 exceeds 10% of system memory.
+array([[-0.08613949, -1.27145016,  0.10409975, ..., -1.02444005,
+         1.13155949, -0.73499292],
+       [ 2.39411974,  0.92017001, -0.300984  , ...,  0.63372725,
+         0.23164678,  2.81303144],
+       [ 0.31313413, -1.18205237, -0.02459498, ...,  0.98927897,
+         0.51966274, -0.43034643],
+       ..., 
+       [-1.35893583, -1.3196733 , -2.02820873, ..., -0.15807804,
+         0.29467261, -0.99361682],
+       [ 0.82000208, -1.33327091, -0.32671973, ...,  0.26581326,
+         1.53672028, -1.22627211],
+       [-1.07414722, -1.22382486, -0.13058007, ..., -1.595191  ,
+        -0.01843905,  0.43842185]], dtype=float32)
+>>> a=tf.random_normal((3,3),mean=0,stddev=1)
+>>> a.eval()
+array([[-0.92110115, -1.0897373 ,  0.26513958],
+       [ 0.74255818,  0.53251296, -1.39679313],
+       [ 0.40055537,  1.69570792, -0.67670405]], dtype=float32)
+>>> 
+>>> a=tf.random_uniform((2,2),minval=-2,maxval=2)
+>>> a.eval()
+array([[-1.03623581, -1.87397957],
+       [ 0.33448362, -0.91372538]], dtype=float32)
+>>> c=tf.ones((2,2))
+>>> d=tf.ones((2,2))
+>>> e=c+d
+>>> e.eval()
+array([[ 2.,  2.],
+       [ 2.,  2.]], dtype=float32)
+>>> f=2*e
+>>> f.eval()
+array([[ 4.,  4.],
+       [ 4.,  4.]], dtype=float32)
+>>> d=e*f
+>>> d.eval()
+array([[ 8.,  8.],
+       [ 8.,  8.]], dtype=float32)
+>>> a=tf.eye(4)
+>>> a.eval
+<bound method Tensor.eval of <tf.Tensor 'eye/MatrixDiag:0' shape=(4, 4) dtype=float32>>
+>>> a.eval()
+array([[ 1.,  0.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  0.,  1.,  0.],
+       [ 0.,  0.,  0.,  1.]], dtype=float32)
+>>> r=range(1,5,1)
+>>> r.eval()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'eval'
+>>> r=tf.range(1,5,1)
+>>> r.eval()
+array([1, 2, 3, 4], dtype=int32)
+>>> d=tf.diag(r)
+>>> d.eval()
+array([[1, 0, 0, 0],
+       [0, 2, 0, 0],
+       [0, 0, 3, 0],
+       [0, 0, 0, 4]], dtype=int32)
+>>> d.ones((5,5))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Tensor' object has no attribute 'ones'
+>>> d=tf.ones((5,5))
+>>> d=tf.diag(r)
+>>> d.eval()
+array([[1, 0, 0, 0],
+       [0, 2, 0, 0],
+       [0, 0, 3, 0],
+       [0, 0, 0, 4]], dtype=int32)
+>>> a=tf.ones((2,3))
+>>> a.eval()
+array([[ 1.,  1.,  1.],
+       [ 1.,  1.,  1.]], dtype=float32)
+>>> at=tf.matrix_transpose(a)
+>>> st.eval()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'st' is not defined
+>>> at.eval()
+array([[ 1.,  1.],
+       [ 1.,  1.],
+       [ 1.,  1.]], dtype=float32)
+>>> b=tf.ones((3.4))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/array_ops.py", line 1695, in ones
+    shape = ops.convert_to_tensor(shape, dtype=dtypes.int32)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 1048, in convert_to_tensor
+    as_ref=False)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 1144, in internal_convert_to_tensor
+    ret = conversion_func(value, dtype=dtype, name=name, as_ref=as_ref)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/constant_op.py", line 228, in _constant_tensor_conversion_function
+    return constant(v, dtype=dtype, name=name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/constant_op.py", line 207, in constant
+    value, dtype=dtype, shape=shape, verify_shape=verify_shape))
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/tensor_util.py", line 442, in make_tensor_proto
+    _AssertCompatible(values, dtype)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/tensor_util.py", line 353, in _AssertCompatible
+    (dtype.name, repr(mismatch), type(mismatch).__name__))
+TypeError: Expected int32, got 3.4 of type 'float' instead.
+>>> b=tf.ones((3,4))
+>>> b.eval()
+array([[ 1.,  1.,  1.,  1.],
+       [ 1.,  1.,  1.,  1.],
+       [ 1.,  1.,  1.,  1.]], dtype=float32)
+>>> c=tf.matmul(a,b)
+>>> c.eval()
+array([[ 3.,  3.,  3.,  3.],
+       [ 3.,  3.,  3.,  3.]], dtype=float32)
+>>> 
+
+>>> a=tf.ones((2,2),dtype=tf.int32)
+>>> a.eval()
+array([[1, 1],
+       [1, 1]], dtype=int32)
+>>> b=tf.to_float(a)
+>>> b.eval()
+array([[ 1.,  1.],
+       [ 1.,  1.]], dtype=float32)
+>>> a=tf.ones(8)
+>>> a.eval()
+array([ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.], dtype=float32)
+>>> b=tf.reshape(a,(3,3))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gen_array_ops.py", line 6296, in reshape
+    "Reshape", tensor=tensor, shape=shape, name=name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/op_def_library.py", line 787, in _apply_op_helper
+    op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/util/deprecation.py", line 488, in new_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 3272, in create_op
+    op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 1790, in __init__
+    control_input_ops)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 1629, in _create_c_op
+    raise ValueError(str(e))
+ValueError: Cannot reshape a tensor with 8 elements to shape [3,3] (9 elements) for 'Reshape' (op: 'Reshape') with input shapes: [8], [2] and with input tensors computed as partial shapes: input[1] = [3,3].
+>>> b=tf.reshape(a,(2,4))
+>>> b.eval()
+array([[ 1.,  1.,  1.,  1.],
+       [ 1.,  1.,  1.,  1.]], dtype=float32)
+>>> c=tf.reshape(b,(2,2,2))
+>>> c.eval
+<bound method Tensor.eval of <tf.Tensor 'Reshape_2:0' shape=(2, 2, 2) dtype=float32>>
+>>> c.eval()
+array([[[ 1.,  1.],
+        [ 1.,  1.]],
+
+       [[ 1.,  1.],
+        [ 1.,  1.]]], dtype=float32)
+>>> a=tf.ones(2)
+>>> a.get_shape()
+TensorShape([Dimension(2)])
+>>> a.eval()
+array([ 1.,  1.], dtype=float32)
+>>> b=tf.expand_dims(a,0)
+>>> b.get_shape()
+TensorShape([Dimension(1), Dimension(2)])
+>>> b.eval()
+array([[ 1.,  1.]], dtype=float32)
+>>> c=tf.expand_dims(a,1)
+>>> c.eval()
+array([[ 1.],
+       [ 1.]], dtype=float32)
+>>> d=tf.squeeze(b)
+>>> d.get_shape()
+TensorShape([Dimension(2)])
+>>> d.eval()
+array([ 1.,  1.], dtype=float32)
+>>> 
+>>> d=tf.squeeze(b)
+>>> d.get_shape()
+TensorShape([Dimension(2)])
+>>> d.eval()
+array([ 1.,  1.], dtype=float32)
+>>> a = tf.ones((2, 2))
+>>> a.eval()
+array([[ 1.,  1.],
+       [ 1.,  1.]], dtype=float32)
+>>> b = tf.range(0, 2, 1, dtype=tf.float32)
+>>> b.eval()
+array([ 0.,  1.], dtype=float32)
+>>> b = tf.range(0, 3, 1, dtype=tf.float32)
+>>> b.eval()
+array([ 0.,  1.,  2.], dtype=float32)
+>>> b = tf.range(0, 10, 1, dtype=tf.float32)
+>>> b.eval()
+array([ 0.,  1.,  2.,  3.,  4.,  5.,  6.,  7.,  8.,  9.], dtype=float32)
+>>> b = tf.range(0, 10, 3, dtype=tf.float32)
+>>> b.eval()
+array([ 0.,  3.,  6.,  9.], dtype=float32)
+>>> b = tf.range(0, 2, 1, dtype=tf.float32)
+>>> b.eval()
+array([ 0.,  1.], dtype=float32)
+>>> c=a+b
+>>> c.eval()
+array([[ 1.,  2.],
+       [ 1.,  2.]], dtype=float32)
+>>> a=3
+>>> b=4
+>>> c=a+b
+>>> c
+7
+>>> a=constant(3)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'constant' is not defined
+>>> a=tf.constant(3)
+>>> b=tf.constant(4)
+>>> c=a+B
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'B' is not defined
+>>> c=a+b
+>>> c
+<tf.Tensor 'add_2:0' shape=() dtype=int32>
+>>> c.eval()
+7
+>>> tf.grt_default_graph()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute 'grt_default_graph'
+>>> tf.get_default_graph()
+<tensorflow.python.framework.ops.Graph object at 0x7f45b363ae10>
+>>> 
+
+
+
