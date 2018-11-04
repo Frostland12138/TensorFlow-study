@@ -1,5 +1,9 @@
 when drawing pictures NOTICE::
 the code in the book have several problems, do not use "reshape" function ,otherwise there will be a disaster
+from matplotlib import rc
+rc('text', usetex=True)
+
+this two line will cause unknown disaster .abadant
 
 
 code and output:
