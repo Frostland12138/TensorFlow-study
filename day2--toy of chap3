@@ -1,3 +1,7 @@
+when drawing pictures NOTICE::
+the code in the book have several problems, do not use "reshape" function ,otherwise there will be a disaster
+
+
 code and output:
 >>> import numpy as np
 >>> np.zeros((2,2))
